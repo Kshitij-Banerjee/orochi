@@ -346,7 +346,8 @@ class Client(CmdExitMixin, cmd.Cmd, object):
     def help_set(self):
         print('Syntax: set <setting> <param>')
         print('Configure settings.')
-        print('Settings available: sorting, results_per_page, autologin, terminal_title, log_current_song')
+        print('Settings available: sorting, results_per_page, autologin,')
+        print('                    terminal_title, log_current_file')
         print('To get help for each setting, press enter with no <param>.')
 
     def help_set_sorting(self):
@@ -706,8 +707,8 @@ class PlayCommand(cmd.Cmd, object):
 
         # Log the current song to a file (can be used by other programs)
         if self._log_current_song is True:
-            f = open( expanduser("~") + '/.orochi.current_song.log', 'w')
-            f.write( u' '.join((track_name, '|', track_performer)).encode('utf-8').strip())
+            f = open(expanduser("~") + '/.orochi.current_song.log', 'w')
+            f.write(u' '.join((track_name, '|', track_performer)).encode('utf-8').strip())
             f.close()
 
         # Set terminal title to song info
