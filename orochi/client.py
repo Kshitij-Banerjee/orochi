@@ -336,11 +336,11 @@ class Client(CmdExitMixin, cmd.Cmd, object):
             else:
                 self.help_set_terminal_title()
         elif setting == 'log_current_song':
-           if param == 'yes':
+            if param == 'yes':
                 self.config['log_current_song'] = True
-           elif param == 'no':
+            elif param == 'no':
                 self.config['log_current_song'] = False
-           else:
+            else:
                 self.help_set_log_current_song()
 
     def help_set(self):
@@ -373,7 +373,7 @@ class Client(CmdExitMixin, cmd.Cmd, object):
 
     def help_set_log_current_song(self):
         print('Syntax: set log_current_song yes|no')
-        print('Toggle setting log current song to file ~/.orochi.current_song.log ("no" by default).')
+        print('Toggle setting log current song to file ~/.orochi.current_song.log')
 
     def do_play(self, s):
         # The logic could be simplified here, and not have to re-catch all the exceptions
@@ -706,9 +706,9 @@ class PlayCommand(cmd.Cmd, object):
 
         # Log the current song to a file (can be used by other programs)
         if self._log_current_song is True:
-          f = open( expanduser("~") + '/.orochi.current_song.log', 'w')
-          f.write( u' '.join((track_name, '|', track_performer)).encode('utf-8').strip())
-          f.close()
+            f = open( expanduser("~") + '/.orochi.current_song.log', 'w')
+            f.write( u' '.join((track_name, '|', track_performer)).encode('utf-8').strip())
+            f.close()
 
         # Set terminal title to song info
         if self._terminal_title is True:
