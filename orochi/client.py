@@ -20,7 +20,6 @@ from .errors import InitializationError, TerminatedError
 from .colors import bold, title
 from .xdg import get_orochi_xdg_dir
 from . import meta
-from os.path import expanduser
 
 PY3 = sys.version_info > (3,)
 
@@ -707,9 +706,12 @@ class PlayCommand(cmd.Cmd, object):
 
         # Log the current song to a file (can be used by other programs)
         if self._log_current_song is True:
-            f = open(expanduser("~") + '/.orochi.current_song.log', 'w')
-            f.write(u' '.join((track_name, '|', track_performer)).encode('utf-8').strip())
-            f.close()
+            cachedir = get_orochi_xdg_dir('XDG_CACHE_HOME', '.cache')
+            filename = os.path.join(cachedir, 'current_song.txt')
+            track_attributes = (track_name, track_performer, track_album, track_year)
+            track_attributes = ['' if v is None else v for v in track_attributes]
+            with open(filename, 'w') as songfile:
+                songfile.write(u' | '.join(track_attributes).encode('utf-8').strip())
 
         # Set terminal title to song info
         if self._terminal_title is True:
