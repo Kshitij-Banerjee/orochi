@@ -709,7 +709,7 @@ class PlayCommand(cmd.Cmd, object):
             cachedir = get_orochi_xdg_dir('XDG_CACHE_HOME', '.cache')
             filename = os.path.join(cachedir, 'current_song.txt')
             track_attributes = (track_name, track_performer, track_album, track_year)
-            track_attributes = ['' if v is None else v for v in track_attributes]
+            track_attributes = ['' if v is None else unicode(v) for v in track_attributes]
             with open(filename, 'w') as songfile:
                 songfile.write(u'\n'.join(track_attributes).encode('utf-8').strip())
 
