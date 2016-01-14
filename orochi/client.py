@@ -373,7 +373,7 @@ class Client(CmdExitMixin, cmd.Cmd, object):
 
     def help_set_log_current_song(self):
         print('Syntax: set log_current_song yes|no')
-        print('Toggle setting log current song to file ~/.orochi.current_song.log')
+        print('Toggle setting log current song to file ~/.cache/orochi/current_song.txt')
 
     def do_play(self, s):
         # The logic could be simplified here, and not have to re-catch all the exceptions
@@ -711,7 +711,7 @@ class PlayCommand(cmd.Cmd, object):
             track_attributes = (track_name, track_performer, track_album, track_year)
             track_attributes = ['' if v is None else v for v in track_attributes]
             with open(filename, 'w') as songfile:
-                songfile.write(u' | '.join(track_attributes).encode('utf-8').strip())
+                songfile.write(u'\n'.join(track_attributes).encode('utf-8').strip())
 
         # Set terminal title to song info
         if self._terminal_title is True:
